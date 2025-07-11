@@ -1,0 +1,1115 @@
+/* style.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap');
+
+:root {
+    /* Light Theme Colors */
+    --primary-navy: #332D56;
+    --sidebar-bg: #332D56; /* Dark blue for sidebar */
+    --sidebar-header-color: #E3EEB2; /* White for sidebar title */
+    --sidebar-text-color: #4E6688; /* Light gray for sidebar text */
+    --side-nav-link-hover: #4E6688; /* Slightly lighter blue on hover */
+    --side-nav-link-active-bg: #71C0BB; /* Harvard Crimson for active sidebar link */
+    --side-nav-link-active-shadow: rgba(113, 192, 187, 0.3);
+
+    --content-area-bg: #E3EEB2; /* Warm Ivory for main content area */
+    --card-background: #FFFFFF; /* White for KPI cards and chart containers */
+    --border-color: #4E6688;
+
+    /* Text Colors */
+    --text-dark: #332D56;
+    --text-light: #E3EEB2;
+    --primary-navy: #332D56; /* For chart titles, KPI values */
+    --harvard-crimson: #71C0BB; /* For chart borders, insights titles */
+
+    /* Shadows */
+    --shadow-light: rgba(51, 45, 86, 0.08);
+    --shadow-medium: rgba(51, 45, 86, 0.15);
+
+    /* Toggle Colors */
+    --toggle-bg-light: #4E6688;
+    --toggle-slider-light: #E3EEB2;
+    --toggle-active-bg: #71C0BB; /* Dark blue for active toggle background */
+    --toggle-active-slider: #E3EEB2;
+
+    /* KPI Card Specific Colors */
+    --kpi-purple: #756AB6; /* A suitable purple for KPIs */
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+    --primary-navy: #2E5077;
+    --sidebar-bg: #2E5077; /* Darker sidebar for dark mode */
+    --sidebar-header-color: #F6F4F0;
+    --sidebar-text-color: #4DA1A9;
+    --side-nav-link-hover: #4DA1A9;
+    --side-nav-link-active-bg: #79D7BE; /* Keep active color consistent or adjust */
+
+    --content-area-bg: #2E5077; /* Darker content area */
+    --card-background: #4DA1A9; /* Darker cards */
+    --border-color: #79D7BE;
+
+    --text-dark: #F6F4F0; /* Light text for dark mode */
+    --text-light: #2E5077; /* Dark text if needed for contrast */
+    --primary-navy: #63B3ED; /* Lighter blue for titles etc. */
+    --harvard-crimson: #79D7BE; /* Adjusted crimson for dark mode */
+
+    --shadow-light: rgba(46, 80, 119, 0.3);
+    --shadow-medium: rgba(46, 80, 119, 0.4);
+
+    --toggle-bg-light: #4DA1A9;
+    --toggle-slider-light: #F6F4F0;
+    --toggle-active-bg: #79D7BE;
+    --toggle-active-slider: #F6F4F0;
+
+    /* KPI Card Specific Colors for Dark Mode */
+    --kpi-purple: #A78BFA; /* Lighter purple for dark mode */
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, var(--content-area-bg) 0%, #F5F3EE 100%);
+    color: var(--text-dark);
+    line-height: 1.6;
+    display: flex; /* Use flexbox for main layout */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    background: linear-gradient(135deg, var(--content-area-bg) 0%, #222B3C 100%);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text-color);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+    min-height: 100vh; /* Ensure sidebar takes full height */
+    overflow-y: auto; /* Allow sidebar to scroll if content exceeds height */
+    z-index: 100;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 20px 25px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+    display: flex; /* Use flexbox to center logo */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Logo Styles */
+.site-logo {
+    max-width: 100%; /* Ensure logo fits within its container */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 80px; /* Limit height to fit sidebar header */
+    margin: 10px 0; /* Add vertical margin */
+    transition: opacity 0.3s ease;
+}
+
+/* Hide dark mode logo by default */
+.dark-mode-logo {
+    display: none;
+}
+
+/* When body has dark-mode class, hide light logo and show dark logo */
+body.dark-mode .light-mode-logo {
+    display: none;
+}
+
+body.dark-mode .dark-mode-logo {
+    display: block;
+}
+
+
+.sidebar-header .page-title { /* This rule is now redundant for the title text, but kept if you revert */
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--sidebar-header-color);
+    margin: 0;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.side-nav {
+    flex-grow: 1;
+    padding: 0 15px;
+}
+
+.side-nav-link {
+    background: transparent;
+    border: none;
+    color: var(--sidebar-text-color);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.side-nav-link .icon {
+    margin-right: 12px;
+    font-size: 1.2rem;
+}
+
+.side-nav-link:hover {
+    background: var(--side-nav-link-hover);
+    color: var(--text-light);
+}
+
+.side-nav-link.active {
+    background: var(--side-nav-link-active-bg);
+    color: var(--text-light);
+    box-shadow: 0 4px 12px var(--side-nav-link-active-shadow);
+    transform: translateX(5px);
+}
+
+.sidebar-footer {
+    padding: 20px 15px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+}
+
+.sidebar-footer .side-nav-link {
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+/* --- Theme Toggle Switch Styles --- */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--toggle-bg-light);
+    -webkit-transition: .4s;
+    transition: .4s;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 5px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--toggle-slider-light);
+    -webkit-transition: .4s;
+    transition: .4s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+input:checked + .slider {
+    background-color: var(--toggle-active-bg);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--toggle-active-bg);
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Icons for toggle */
+.slider .icon-light, .slider .icon-dark {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.4s ease;
+}
+
+.slider .icon-dark {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+input:checked + .slider .icon-light {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+input:checked + .slider .icon-dark {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.theme-text {
+    color: var(--sidebar-text-color);
+    font-size: 0.9rem;
+    margin-left: 10px;
+    white-space: nowrap;
+    opacity: 0.8;
+}
+
+/* ------------------------------------------- */
+/* Content Wrapper for Main Content Area */
+.content-wrapper {
+    flex-grow: 1; /* Allows content wrapper to take remaining space */
+    padding: 20px;
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack children vertically */
+    overflow-y: auto; /* This is where the overall page scroll will be managed */
+}
+
+.main-content-area {
+    /* Removed overflow-y: auto from here */
+    background: var(--card-background);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--shadow-medium);
+    max-width: 1400px;
+    width: 100%;
+    margin: auto; /* Centers the content area horizontally */
+    flex-grow: 1; /* Allows main content to grow and push footer down */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hide all main tab content by default */
+.main-tab-content {
+    display: none;
+}
+
+/* Show only the active main tab content */
+.main-tab-content.active {
+    display: block;
+}
+
+/* Section Headings for Main Tabs */
+.section-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-navy);
+    margin-bottom: 10px;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.section-subheading {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 30px;
+    opacity: 0.8;
+    transition: color 0.3s ease;
+}
+
+.intro-text {
+    background: var(--content-area-bg);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--shadow-light);
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.intro-text p {
+    margin-bottom: 15px;
+    line-height: 1.8;
+    color: var(--text-dark);
+}
+
+.intro-text ul {
+    list-style-type: disc;
+    margin-left: 25px;
+    margin-bottom: 15px;
+}
+
+.intro-text li {
+    margin-bottom: 8px;
+}
+
+/* Dashboard Specific Styles */
+.dashboard-header {
+    background: linear-gradient(135deg, var(--primary-navy), #000A1A);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px var(--shadow-medium);
+    text-align: center;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode .dashboard-header {
+    background: linear-gradient(135deg, #2E5077, #1A202C);
+}
+
+.dashboard-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.dashboard-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* KPI Cards */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.kpi-card {
+    background: var(--card-background);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px var(--shadow-light);
+    border-left: 5px solid var(--primary-navy);
+    position: relative;
+    transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.kpi-card:nth-child(odd) {
+    border-left-color: var(--primary-navy);
+}
+
+.kpi-card:nth-child(even) {
+    border-left-color: var(--kpi-purple);
+}
+
+
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(0, 120, 212, 0.1) 0%, rgba(64, 224, 208, 0.1) 100%);
+    border-radius: 50%;
+    transform: translate(30px, -30px);
+    z-index: 0;
+}
+
+body.dark-mode .kpi-card::before {
+    background: linear-gradient(135deg, rgba(99, 179, 237, 0.1) 0%, rgba(128, 203, 196, 0.1) 100%);
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px var(--shadow-medium);
+}
+
+.kpi-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+.kpi-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-navy);
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.kpi-label {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
+    opacity: 0.9;
+    transition: color 0.3s ease;
+}
+
+.kpi-change {
+    font-size: 0.9rem;
+    margin-top: 8px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+}
+
+.positive {
+    background-color: #e8f5e8;
+    color: #2e7d32;
+}
+
+body.dark-mode .positive {
+    background-color: #2F855A;
+    color: #C6F6D5;
+}
+
+.negative {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+body.dark-mode .negative {
+    background-color: #C53030;
+    color: #FED7D7;
+}
+
+/* Charts Grid */
+.charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.chart-container {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 25px var(--shadow-light);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chart-container:hover {
+    transform: translateY(-3px);
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.chart-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-navy);
+    margin-bottom: 15px;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--harvard-crimson);
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.insights-section {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 25px var(--shadow-light);
+    margin-top: 30px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.insights-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--harvard-crimson);
+    margin-bottom: 20px;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.insight-item {
+    background: var(--content-area-bg);
+    border-left: 4px solid var(--harvard-crimson);
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.insight-item:last-child {
+    margin-bottom: 0;
+}
+
+.insight-text {
+    color: var(--text-dark);
+    line-height: 1.6;
+    transition: color 0.3s ease;
+}
+
+.insight-text strong {
+    color: var(--primary-navy);
+    transition: color 0.3s ease;
+}
+
+/* About Us Section */
+#about-us-main .intro-text {
+    background: var(--content-area-bg);
+    box-shadow: 0 5px 15px var(--shadow-light);
+    border-radius: 12px;
+    padding: 25px;
+}
+
+#about-us-main h3 {
+    font-size: 1.4rem;
+    color: var(--primary-navy);
+    margin-top: 25px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 8px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+#about-us-main ul {
+    list-style-type: square;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+#about-us-main li {
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+/* Dataset Section Specific Styles */
+
+/* New Grid Layout for Dataset Section */
+.dataset-content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Description takes 2/3, Quick Look takes 1/3 */
+    gap: 30px;
+    margin-bottom: 30px;
+    align-items: start; /* Align items to the start of the grid area */
+}
+
+.dataset-description {
+    background: var(--content-area-bg);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--shadow-light);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dataset-description h3 {
+    font-size: 1.4rem;
+    color: var(--primary-navy);
+    margin-top: 20px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 8px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.dataset-description h3:first-child {
+    margin-top: 0; /* Remove top margin for the first h3 */
+}
+
+.dataset-description p,
+.dataset-description li {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    line-height: 1.7;
+}
+
+.dataset-description ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.dataset-description strong {
+    color: var(--primary-navy);
+}
+
+.citation {
+    font-size: 0.9em;
+    color: var(--text-dark);
+    opacity: 0.8;
+    margin-top: 20px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 10px;
+}
+
+.dataset-quick-look {
+    display: flex; /* Enable flexbox for vertical stacking of cards */
+    flex-direction: column;
+    gap: 20px; /* Space between Quick Look and Strengths/Limitations cards */
+}
+
+.quick-look-card,
+.strengths-limitations-card { /* Apply common card styles */
+    background: var(--card-background);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px var(--shadow-light);
+    border-left: 5px solid var(--harvard-crimson);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+
+.quick-look-card h4,
+.strengths-limitations-card h4 {
+    font-size: 1.3rem;
+    color: var(--harvard-crimson);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quick-look-card h4 .icon,
+.strengths-limitations-card h4 .icon {
+    font-size: 1.5rem;
+}
+
+.quick-look-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border-color);
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+.quick-look-item:last-child {
+    border-bottom: none;
+}
+
+.quick-look-item strong {
+    flex-basis: 50%;
+    font-weight: 600;
+}
+
+.quick-look-item span {
+    flex-basis: 50%;
+    text-align: right;
+    opacity: 0.9;
+}
+
+/* Styles for the new strengths/limitations items */
+.strength-item, .limitation-item {
+    padding: 10px 0;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+.strength-item strong, .limitation-item strong {
+    display: block; /* Make the strong tag a block to separate from list */
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--primary-navy);
+}
+
+.strength-item ul, .limitation-item ul {
+    list-style-type: none; /* Remove default bullet */
+    padding-left: 0;
+    margin: 0;
+}
+
+.strength-item li, .limitation-item li {
+    position: relative;
+    padding-left: 20px; /* Space for custom bullet */
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.strength-item li::before {
+    content: '\2713'; /* Checkmark icon */
+    font-family: 'Font Awesome 5 Free'; /* Using FontAwesome */
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    color: #2e7d32; /* Green for strengths */
+}
+
+.limitation-item li::before {
+    content: '\2715'; /* Cross icon */
+    font-family: 'Font Awesome 5 Free'; /* Using FontAwesome */
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    color: #c62828; /* Red for limitations */
+}
+
+/* Add a border between strength and limitation sections if desired */
+.strengths-limitations-card .strength-item {
+    border-bottom: 1px dashed var(--border-color);
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+}
+
+
+.download-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.download-section h3 {
+    font-size: 1.4rem;
+    color: var(--primary-navy);
+    margin-bottom: 20px;
+}
+
+.download-button {
+    display: inline-block;
+    background-color: var(--harvard-crimson);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(113, 192, 187, 0.3);
+}
+
+.download-button:hover {
+    background-color: var(--primary-navy);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(51, 45, 86, 0.4);
+}
+
+.download-button .fas {
+    margin-right: 8px;
+}
+
+.download-note {
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    margin-top: 15px;
+    opacity: 0.7;
+}
+
+/* --- Company List Section Styles --- */
+.company-list-container {
+    background: var(--content-area-bg);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--shadow-light);
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-and-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+    justify-content: center;
+}
+
+.search-and-filter input[type="text"],
+.search-and-filter select {
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: var(--card-background);
+    color: var(--text-dark);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    flex: 1; /* Allow items to grow */
+    min-width: 200px; /* Minimum width before wrapping */
+}
+
+.search-and-filter input[type="text"]:focus,
+.search-and-filter select:focus {
+    border-color: var(--harvard-crimson);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(113, 192, 187, 0.2);
+}
+
+/* Table styles */
+.company-table-container {
+    overflow-x: auto; /* Enable horizontal scrolling for small screens */
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+#companyTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card-background);
+    color: var(--text-dark);
+    border-radius: 10px;
+    overflow: hidden; /* Ensures rounded corners apply to content */
+}
+
+#companyTable thead {
+    background-color: var(--primary-navy);
+    color: var(--text-light);
+}
+
+#companyTable th {
+    padding: 15px 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    white-space: nowrap; /* Prevent wrapping of headers */
+}
+
+#companyTable tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
+}
+
+#companyTable tbody tr:last-child {
+    border-bottom: none;
+}
+
+#companyTable tbody tr:hover {
+    background-color: var(--content-area-bg);
+}
+
+#companyTable td {
+    padding: 12px 20px;
+    vertical-align: middle;
+    font-size: 0.95rem;
+    white-space: nowrap; /* Prevent wrapping of cell content */
+}
+
+/* Pagination Controls */
+#pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    color: var(--text-dark);
+}
+
+#pagination-controls button {
+    background-color: var(--harvard-crimson);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#pagination-controls button:hover {
+    background-color: var(--primary-navy);
+    transform: translateY(-2px);
+}
+
+#pagination-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#page-info {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+
+/* Footer Styles */
+.site-footer {
+    background-color: var(--primary-navy); /* Dark background like sidebar */
+    color: var(--sidebar-text-color); /* Light text color */
+    padding: 30px 20px;
+    margin-top: 30px; /* Space above the footer */
+    text-align: center;
+    border-radius: 15px; /* Match main content area border-radius */
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    flex-shrink: 0; /* Prevent footer from shrinking */
+    max-width: 1400px; /* Match main-content-area width */
+    width: 100%;
+    align-self: center; /* Center the footer within the content-wrapper */
+}
+
+body.dark-mode .site-footer {
+    background-color: var(--sidebar-bg); /* Use dark mode sidebar color */
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.site-footer p {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.site-footer .footer-heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--sidebar-header-color); /* Lighter color for heading */
+    margin-bottom: 15px;
+}
+
+.site-footer .copyright {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) { /* Adjusted breakpoint for dataset grid */
+    .dataset-content-grid {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+    .dataset-description,
+    .dataset-quick-look {
+        margin-bottom: 20px; /* Add some space between stacked sections */
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding-top: 10px;
+        min-height: unset; /* Remove min-height for mobile */
+    }
+
+    .sidebar-header {
+        padding: 15px 20px;
+    }
+
+    /* Adjust logo size for smaller screens if needed */
+    .site-logo {
+        max-height: 60px; /* Smaller height for mobile */
+        margin: 5px 0; /* Smaller margin */
+    }
+
+
+    .sidebar-header .page-title { /* This rule is now redundant for the title text, but kept if you revert */
+        font-size: 1.4rem;
+    }
+
+    .content-wrapper {
+        padding: 15px;
+        /* overflow-x: hidden; */ /* Already set for body */
+    }
+
+    .main-content-area {
+        padding: 20px;
+        /* overflow-y: unset; */ /* Removed this, as main-tab-content is now block/none */
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+
+    .kpi-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .side-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0 10px;
+    }
+
+    .side-nav-link {
+        flex: 1 1 auto;
+        text-align: center;
+        justify-content: center;
+        padding: 10px 12px;
+    }
+
+    .dashboard-title {
+        font-size: 2rem;
+    }
+
+    .download-button {
+        display: block; /* Stack buttons vertically on small screens */
+        margin: 10px auto;
+        max-width: 250px;
+    }
+
+    .site-footer {
+        padding: 20px 15px; /* Adjust padding for smaller screens */
+    }
+
+    .search-and-filter {
+        flex-direction: column;
+    }
+
+    .search-and-filter input[type="text"],
+    .search-and-filter select {
+        width: 100%; /* Full width on small screens */
+        min-width: unset;
+    }
+
+    #companyTable th,
+    #companyTable td {
+        padding: 10px 15px; /* Reduce padding for smaller screens */
+        font-size: 0.9rem;
+    }
+}
